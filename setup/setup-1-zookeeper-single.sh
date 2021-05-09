@@ -32,13 +32,17 @@ bin/zookeeper-server-start.sh config/zookeeper.properties
 
 # Testing Zookeeper install
 # Start Zookeeper in the background
-bin/zookeeper-server-start.sh -daemon config/zookeeper.properties
-bin/zookeeper-shell.sh localhost:2181
-ls /
+# Below command will start zookeeper but it is not yet configured properly. It is just for testing.
+bin/zookeeper-server-start.sh -daemon config/zookeeper.properties 
+bin/zookeeper-shell.sh localhost:2181 # Starting zookeper. It will open if zookeeper has started successfully.
+ls / # type in zookeeper. If output is [zookeeper] then is has started sucessfully.
 # demonstrate the use of a 4 letter word
-echo "ruok" | nc localhost 2181 ; echo
+echo "ruok" | nc localhost 2181 ; echo # ctrl+c then run it, if output is "imok" the zookeeper running successfully.
 
-# Install Zookeeper boot scripts
+# Till now we have run zookeeper in a different way.
+# Below configurations will help to start,stop, etc the zookeeper in a more intuitive way.
+# Install Zookeeper boot scripts. Go to zookeeper folder in the code repo and copy the zookeeper file
+# in the /etc/init.d/ directory and then proceed as mentioned.
 sudo nano /etc/init.d/zookeeper
 sudo chmod +x /etc/init.d/zookeeper
 sudo chown root:root /etc/init.d/zookeeper
