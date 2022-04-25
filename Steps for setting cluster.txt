@@ -1,0 +1,49 @@
+Steps :
+
+****************** Setting up zookeeper quorum ******************
+
+1) 3 is sufficient, for larger clusters say broker size is like 100 go for 5 quorom size zookeeper.
+2) For setting up zookeeper refer the zookeeper directory. It has all the required configuarations needed.
+3) Zookeeper AWS Setup
+    -- Select the region with 3 minimum subnets(VPC -> Subnets)
+    -- Launch EC2 instances(Refer docs/google for configs, launch the intances in the mentioned subnets by assigning primary IP belonging to
+    the CIDR block of the subnets)
+4) How to SSH into the instance :
+    -- chmod 0600 key.pem file
+    -- ssh -i key.pem  user@IPv4_public_IP (Eg: ssh -i key.pem ubuntu@ipaddress)
+5) Zookeeper Single Machine Setup 
+    -- Setup directory -> setup-1-zookeeper-single.sh (setup the DNS as per the primary IP of the ec2 instance)
+6) Zookeeper Service setup 
+    -- Copy contents from Zookeeper directory -> zookeeper file to /etc/init.d/zookeeper as per the zookeeper steps
+       mentioned in setup-1-zookeeper-single.sh
+    -- Follow on with the remaining steps in setup-1-zookeeper-single.sh
+7) Using zookeeper command line interface 
+    -- zookeeper directory -> zookeeper-shell-examples.sh 
+
+8) Single Zookeeper cluster will be up and running till this setup 
+9) Zookeeper quorum setup (Part 1 - AWS)
+   -- Create an image from the already created EC2 instance.    
+   -- Verify snapshots has been created by going to EC2 -> snapshots
+   -- Creating an Image takes some time 5-10 minutes.
+   -- Launch using AMI (EC2->Images->AMIs-> select image -> Launch)
+   -- Same steps as in Step 3 (use the same key file, choose appropriate subnets,primary IPs,etc)
+   -- ssh as per in step 4
+10) Zookeeper Quorum Setup (Part 2 - Zookeeper)
+   -- Refer setup-2-zookeeper-quorom.sh
+   -- Perform the steps on all the EC2 instances.
+   -- Copy the zookeeper directory -> zookeeper.properties file to appropriate directory as mentioned in the script file.
+11) Zookeeper 4 letter words for testing/Debugging the cluster.
+   -- Refer zookeeper directory -> four-letter-words.sh  
+
+****************** Setting up Kafka Cluster ******************   
+
+1) 
+   
+     
+
+
+
+
+
+
+
